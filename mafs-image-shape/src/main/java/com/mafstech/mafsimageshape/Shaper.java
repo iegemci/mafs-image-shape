@@ -16,14 +16,34 @@ import android.widget.ImageView;
 
 public class Shaper {
 
-    public static void shape(Context context, int originalIMG, int bitmapIMG, ImageView imgView, int height, int width) {
+    /**
+     * @param context you need to pass the context (ex: Your current activity's instance)
+     * @param shapedImage pass an image from your drawable folder (Ex: R.drawable.sample_image_name)
+     *                    which is shaped for your real image.Your expected image will look like this.
+     * @param originalImage pass your image from your drawable (Ex: R.drawable.your_image_name).
+     *                      This is your original image.
+     * @param imgView pass an ImageView in which you want to set your expected image.
+     * @param expectedHeight (int value) this is expected height for your image.
+     * @param expectedWidth (int value) this is expected width for your image.
+     *
+     *           ***YOUR SHAPED IMAGE SIZE WILL BE FOR YOUR MDPI DEVICE.
+     *                      IF YOUR SHAPED IMAGE SIZE IS 100PX THEN YOU
+     *                      NEED TO PASS HEIGHT AND WIDTH 100 FOR YOUR MDPI DEVICE.
+     *                      ***100X1.5 FOR YOUR HDPI DEVICE
+     *                      ***100X2 FOR YOUR XHDPI DEVICE
+     *                      ***100X3 FOR YOUR XXHDPI DEVICE
+     *                      ***100X4 FOR YOUR XXXHDPI DEVICE
+     *                      ######## height and width can be different ########
+     *           ***
+     * */
+    public static void shape(Context context, int originalImage, int shapedImage, ImageView imgView, int expectedHeight, int expectedWidth) {
 
-        Bitmap original = BitmapFactory.decodeResource(context.getResources(), originalIMG);
-        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), bitmapIMG);
+        Bitmap original = BitmapFactory.decodeResource(context.getResources(), originalImage);
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), shapedImage);
 
         Bitmap mask = bitmap;
 
-        original = getResizedBitmap(original, height, width);
+        original = getResizedBitmap(original, expectedHeight, expectedWidth);
 
         int bitmapHeight = bitmap.getHeight();
         int bitmapWidth = bitmap.getWidth();
@@ -49,14 +69,21 @@ public class Shaper {
 
     }
 
-    public static Bitmap getResizedBitmap(Bitmap bm, float newHeight, float newWidth) {
-        int width = bm.getWidth();
-        int height = bm.getHeight();
+    /**
+     * By using this method you can resize your image
+     *
+     * @param image pass a bitmap image for resizing.
+     * @param newHeight pass your expected new height in px (int value).
+     * @param newWidth pass your expected new width in px (int value).
+     * */
+    public static Bitmap getResizedBitmap(Bitmap image, float newHeight, float newWidth) {
+        int width = image.getWidth();
+        int height = image.getHeight();
         float scaleWidth = ((float) newWidth) / width;
         float scaleHeight = ((float) newHeight) / height;
         Matrix matrix = new Matrix();
         matrix.postScale(scaleWidth, scaleHeight);
-        Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+        Bitmap resizedBitmap = Bitmap.createBitmap(image, 0, 0, width, height, matrix, false);
 
         return resizedBitmap;
     }

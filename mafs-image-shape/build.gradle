@@ -3,7 +3,7 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
 group = 'com.mafstech.libs'
-version = '1.0.2' //YOUR LIBRARY VERSION
+version = '1.0.3' //LIBRARY VERSION
 
 android {
     compileSdkVersion 25
@@ -109,8 +109,3 @@ bintray {
         publicDownloadNumbers = true
     }
 }
-
-
-/*
-apply from: 'install.gradle'
-apply from: 'bintray.gradle'*/

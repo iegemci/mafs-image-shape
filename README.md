@@ -1,5 +1,5 @@
 
-<h2>mafs-image-shape</h2>
+<h2>mafs-image-shape (Library for developing android project)</h2>
 <p>This is a library for making custom shape for your image on your image view. If you want to make a custom shape for your image you need to pass two image, first one is original image and second one is for your shape. First one is your actual image, this image will get the shape as like second image.</p>
 
 <h2>Installation</h2>
